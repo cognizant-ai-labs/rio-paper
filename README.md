@@ -4,7 +4,7 @@ Copyright (C) 2020 Cognizant Digital Business, Evolutionary AI. All Rights Reser
 # rio-paper
 Code and supporting materials for the ICLR 2020 RIO paper
 
-This repository contains all the source codes to reproduce the experimental results reported in paper "Quantifying Point-Prediction Uncertainty in Neural Networks via Residual Estimation with an I/O Kernel", which is published in ICLR 2020.
+This repository contains all the source codes to reproduce the experimental results reported in paper "Quantifying Point-Prediction Uncertainty in Neural Networks via Residual Estimation with an I/O Kernel", which is published in ICLR 2020. (Arxiv Link: https://arxiv.org/abs/1906.00588)
 
 Before running the codes, three directories need to be created under the current path:   
 ```./Datasets/``` - contains the original datasets downloaded from UCI Machine Learning Repository (https://archive.ics.uci.edu/ml/datasets.php?format=&task=reg&att=&area=&numAtt=&numIns=&type=&sort=nameUp&view=table)  
