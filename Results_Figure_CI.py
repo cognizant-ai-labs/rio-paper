@@ -125,52 +125,6 @@ for dataset_index in range(0,len(dataset_name_list)):
     with open(result_file_name, 'rb') as result_file:
         PCT_within68Interval_GP_outputOnly = pickle.load(result_file)
 
-    if dataset_index<4:
-        kernel_type = "NNGP"
-        framework_variant = "NNGP"
-        result_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Results','PCT_within95Interval_{}_suffledData_{}_{}_{}_{}_M{}_minibatch{}_{}_{}run.pkl'.format(framework_variant, dataset_name, model_name, NN_size, kernel_type, M, minibatch_size, optimizer_name, RUNS))
-        with open(result_file_name, 'rb') as result_file:
-            PCT_within95Interval_NNGP = pickle.load(result_file)
-
-        result_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Results','PCT_within90Interval_{}_suffledData_{}_{}_{}_{}_M{}_minibatch{}_{}_{}run.pkl'.format(framework_variant, dataset_name, model_name, NN_size, kernel_type, M, minibatch_size, optimizer_name, RUNS))
-        with open(result_file_name, 'rb') as result_file:
-            PCT_within90Interval_NNGP = pickle.load(result_file)
-
-        result_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Results','PCT_within68Interval_{}_suffledData_{}_{}_{}_{}_M{}_minibatch{}_{}_{}run.pkl'.format(framework_variant, dataset_name, model_name, NN_size, kernel_type, M, minibatch_size, optimizer_name, RUNS))
-        with open(result_file_name, 'rb') as result_file:
-            PCT_within68Interval_NNGP = pickle.load(result_file)
-
-        TRAINING_ITERATIONS = 2000 #@param {type:"number"}
-        MAX_CONTEXT_POINTS = 50 #@param {type:"number"}
-        PLOT_AFTER = 50#@param {type:"number"}
-        HIDDEN_SIZE = 64 #@param {type:"number"}
-        MODEL_TYPE = 'ANP' #@param ['NP','ANP']
-        ATTENTION_TYPE = 'multihead' #@param ['uniform','laplace','dot_product','multihead']
-        random_kernel_parameters=True #@param {type:"boolean"}
-        context_ratio = 0.8
-
-        latent_encoder_output_sizes = [HIDDEN_SIZE]*4
-        num_latents = HIDDEN_SIZE
-        deterministic_encoder_output_sizes= [HIDDEN_SIZE]*4
-        decoder_output_sizes = [HIDDEN_SIZE]*2 + [2]
-        use_deterministic_path = True
-        kernel_type = "RBF+RBF"
-        optimizer_name = "Adam"
-        framework_variant = "ANP"
-        gap_num = 39
-
-        result_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Results','PCT_within95Interval_{}_suffledData_{}_{}_{}_{}_Iteration{}_Gap{}_minibatch{}_{}_{}run.pkl'.format(framework_variant, dataset_name, model_name, NN_size, kernel_type, TRAINING_ITERATIONS, PLOT_AFTER, minibatch_size, optimizer_name, RUNS))
-        with open(result_file_name, 'rb') as result_file:
-            PCT_within95Interval_ANP = pickle.load(result_file)
-
-        result_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Results','PCT_within90Interval_{}_suffledData_{}_{}_{}_{}_Iteration{}_Gap{}_minibatch{}_{}_{}run.pkl'.format(framework_variant, dataset_name, model_name, NN_size, kernel_type, TRAINING_ITERATIONS, PLOT_AFTER, minibatch_size, optimizer_name, RUNS))
-        with open(result_file_name, 'rb') as result_file:
-            PCT_within90Interval_ANP = pickle.load(result_file)
-
-        result_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Results','PCT_within68Interval_{}_suffledData_{}_{}_{}_{}_Iteration{}_Gap{}_minibatch{}_{}_{}run.pkl'.format(framework_variant, dataset_name, model_name, NN_size, kernel_type, TRAINING_ITERATIONS, PLOT_AFTER, minibatch_size, optimizer_name, RUNS))
-        with open(result_file_name, 'rb') as result_file:
-            PCT_within68Interval_ANP = pickle.load(result_file)
-
     PCT_within95Interval = []
     PCT_within95Interval.append(PCT_within95Interval_GPcorrected)
     PCT_within95Interval.append(PCT_within95Interval_GPcorrected_inputOnly)
@@ -178,19 +132,13 @@ for dataset_index in range(0,len(dataset_name_list)):
     PCT_within95Interval.append(PCT_within95Interval_GP_outputOnly)
     PCT_within95Interval.append(PCT_within95Interval_GP)
     PCT_within95Interval.append(PCT_within95Interval_GP_inputOnly)
-    if dataset_index<4:
-        PCT_within95Interval.append(PCT_within95Interval_NNGP)
-        PCT_within95Interval.append(np.array(PCT_within95Interval_ANP)[:,gap_num])
 
     f = plt.figure()
     plt.title("{}: percentage of test points within 95% CI".format(title_name))
     plt.boxplot(PCT_within95Interval)
     plt.ylabel('percentage of test points within 95% CI')
     plt.xlabel('algorithm')
-    if dataset_index<4:
-        plt.xticks(range(1,9),('RIO','R+I','R+O','Y+O','Y+IO','SVGP','NNGP','ANP'))
-    else:
-        plt.xticks(range(1,7),('RIO','R+I','R+O','Y+O','Y+IO','SVGP'))
+    plt.xticks(range(1,7),('RIO','R+I','R+O','Y+O','Y+IO','SVGP'))
     plt.yticks(list(plt.yticks()[0]) + [0.95])
     _ = plt.plot([-100, 100], [0.95, 0.95], 'r--', alpha=alpha_value)
     plot_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Plots','PCT_within95Interval_comparison_{}.pdf'.format(dataset_name))
@@ -203,19 +151,13 @@ for dataset_index in range(0,len(dataset_name_list)):
     PCT_within90Interval.append(PCT_within90Interval_GP_outputOnly)
     PCT_within90Interval.append(PCT_within90Interval_GP)
     PCT_within90Interval.append(PCT_within90Interval_GP_inputOnly)
-    if dataset_index<4:
-        PCT_within90Interval.append(PCT_within90Interval_NNGP)
-        PCT_within90Interval.append(np.array(PCT_within90Interval_ANP)[:,gap_num])
 
     f = plt.figure()
     plt.title("{}: percentage of test points within 90% CI".format(title_name))
     plt.boxplot(PCT_within90Interval)
     plt.ylabel('percentage of test points within 90% CI')
     plt.xlabel('algorithm')
-    if dataset_index<4:
-        plt.xticks(range(1,9),('RIO','R+I','R+O','Y+O','Y+IO','SVGP','NNGP','ANP'))
-    else:
-        plt.xticks(range(1,7),('RIO','R+I','R+O','Y+O','Y+IO','SVGP'))
+    plt.xticks(range(1,7),('RIO','R+I','R+O','Y+O','Y+IO','SVGP'))
     plt.yticks(list(plt.yticks()[0]) + [0.90])
     _ = plt.plot([-100, 100], [0.90, 0.90], 'r--', alpha=alpha_value)
     plot_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Plots','PCT_within90Interval_comparison_{}.pdf'.format(dataset_name))
@@ -228,19 +170,13 @@ for dataset_index in range(0,len(dataset_name_list)):
     PCT_within68Interval.append(PCT_within68Interval_GP_outputOnly)
     PCT_within68Interval.append(PCT_within68Interval_GP)
     PCT_within68Interval.append(PCT_within68Interval_GP_inputOnly)
-    if dataset_index<4:
-        PCT_within68Interval.append(PCT_within68Interval_NNGP)
-        PCT_within68Interval.append(np.array(PCT_within68Interval_ANP)[:,gap_num])
 
     f = plt.figure()
     plt.title("{}: percentage of test points within 68% CI".format(title_name))
     plt.boxplot(PCT_within68Interval)
     plt.ylabel('percentage of test points within 68% CI')
     plt.xlabel('algorithm')
-    if dataset_index<4:
-        plt.xticks(range(1,9),('RIO','R+I','R+O','Y+O','Y+IO','SVGP','NNGP','ANP'))
-    else:
-        plt.xticks(range(1,7),('RIO','R+I','R+O','Y+O','Y+IO','SVGP'))
+    plt.xticks(range(1,7),('RIO','R+I','R+O','Y+O','Y+IO','SVGP'))
     plt.yticks(list(plt.yticks()[0]) + [0.68])
     _ = plt.plot([-100, 100], [0.68, 0.68], 'r--', alpha=alpha_value)
     plot_file_name = os.path.join(os.path.dirname(os.path.abspath(__file__)),'Plots','PCT_within68Interval_comparison_{}.pdf'.format(dataset_name))
