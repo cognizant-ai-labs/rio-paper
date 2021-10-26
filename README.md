@@ -18,3 +18,16 @@ Before running the codes, three directories need to be created under the current
 ```Results_Figure_RMSE.py``` - file for plotting all the figures in Figure 3  
 ```Results_Figure_CI.py``` - file for plotting all the figures in Figure 4 and Figure 5  
 ```Results_Spearman_correlation.py``` - file for calculating Spearman's rank correlation between RMSE and noise variance  
+
+## Citation
+
+If you use RIO in your research, please cite it using the following BibTeX entry
+```
+@inproceedings{
+Qiu2020Quantifying,
+title={Quantifying Point-Prediction Uncertainty in Neural Networks via Residual Estimation with an I/O Kernel},
+author={Xin Qiu and Elliot Meyerson and Risto Miikkulainen},
+booktitle={International Conference on Learning Representations},
+year={2020},
+}
+```
