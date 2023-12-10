@@ -23,11 +23,10 @@ Before running the codes, three directories need to be created under the current
 
 If you use RIO in your research, please cite it using the following BibTeX entry
 ```
-@inproceedings{
-Qiu2020Quantifying,
+@inproceedings{qiu:iclr20,
 title={Quantifying Point-Prediction Uncertainty in Neural Networks via Residual Estimation with an I/O Kernel},
 author={Xin Qiu and Elliot Meyerson and Risto Miikkulainen},
 booktitle={International Conference on Learning Representations},
-year={2020},
+year={2020}
 }
 ```
